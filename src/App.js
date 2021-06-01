@@ -10,6 +10,7 @@ import Content from "./components/Page2";
 import About from "./components/Page3";
 import PageNotFound from "./components/PageNotFound";
 import 'semantic-ui-css/semantic.min.css'
+import Page3 from './components/Page3';
 
 let url = 'https://movie-database-imdb-alternative.p.rapidapi.com'
 
@@ -55,6 +56,8 @@ export default class App extends Component {
           })
       }
 
+
+
   render() {
     return (
       
@@ -69,27 +72,17 @@ export default class App extends Component {
             <Link to='/About'>About</Link>
         </li>
         <li>
-            <Link to='/Content'>Content</Link>
+            <Link to='/Content'>Most Popular Movies</Link>
         </li>
         </ul>
       
         <Switch>
 
-          <Route exact path='/' component={HomePage}> {/*Home page*/} <HomePage /> </Route>
-          <Route exact path='/About' component={About}> {/*About page*/} <About /></Route>
-          <Route exact path='/Content' component={Content}> {/*Content page*/} <Content /> </Route>
-          <Route exact path='/PageNotFound' component={PageNotFound} />
-          <Redirect to="/PageNotFound"/>
-
-        </Switch>
-        <div>
-          <button onClick={ this.PageDown}>Previous Page</button>
-          <button onClick={ this.PageUp}>Next Page</button>
+          <Route exact path='/' component={HomePage}> {/*Home page*/} <div>
+          <button onClick={ this.PageDown }>Previous Page</button>
+          <button onClick={ this.PageUp }>Next Page</button>
           <h3>Page {this.state.pageNum}</h3>
-          
-        </div>
-
-        <h1 style={{fontSize: 45}}>Find a flick app</h1>
+          <h1 style={{fontSize: 45}}>Find a flick app</h1>
 
         <input name="text" 
         type="text" 
@@ -97,22 +90,33 @@ export default class App extends Component {
         onChange={event => this.handleOnChange(event)}
         value={this.state.searchValue}
         />
-        
         <button onClick={this.handleSearch}>Search</button>
 
-        {this.state.movies ? (
-          <div id="movies-container">
-            {this.state.movies.map((movie, index) => (
-              <div class="single-movie" key={index}>
-                <h2>{movie.Title}: ({movie.Type}, {movie.Year})</h2>
-                <img src={movie.Poster} alt=''/>
-                
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p></p>
-        )}
+{this.state.movies ? (
+  <div id="movies-container">
+    {this.state.movies.map((movie, index) => (
+      <div class="single-movie" key={index}>
+        <h2>{movie.Title}: ({movie.Type}, {movie.Year})</h2>
+        <img src={movie.Poster} alt=''/>
+        
+      </div>
+    ))}
+  </div>
+) : (
+  <p></p>
+)}
+        </div><HomePage /> </Route>
+          <Route exact path='/About' component={About}> {/*About page*/} <About /></Route>
+          <Route exact path='/Content' component={Content}> {/*Content page*/} <Content /> </Route>
+          <Route exact path='/PageNotFound' component={PageNotFound} />
+          <Redirect to="/PageNotFound"/>
+
+        </Switch>
+        
+
+        
+        
+        
       </div>
       
       </BrowserRouter>
