@@ -12,6 +12,7 @@ import PageNotFound from "./components/PageNotFound";
 import 'semantic-ui-css/semantic.min.css'
 import Page3 from './components/Page3';
 
+/*API Link */
 let url = 'https://movie-database-imdb-alternative.p.rapidapi.com'
 
 export default class App extends Component {
@@ -20,27 +21,28 @@ export default class App extends Component {
       movies: [],
       pageNum: 1
     };
-
+/*Increase page number */
     PageUp = () => {
       this.setState({
         pageNum: this.state.pageNum +1
       })
     }
-
+/*Decrease page number */
     PageDown = () => {
       this.setState({
         pageNum: this.state.pageNum -1
       })
     }
-
+/*updates search value */
     handleOnChange = e => {
       this.setState({ searchValue: e.target.value })
     };
-
+/*searches api with value typed into search bar */
     handleSearch = () => {
      this.makeApiCall(this.state.searchValue)
       }
 
+/*Fetch (GET) data based on page # */
       makeApiCall = input => {
         let searchUrl = `${url}/?s=${input}&page=${this.state.pageNum}`
         const requiredObj = {"method": "GET",
@@ -60,7 +62,7 @@ export default class App extends Component {
 
   render() {
     return (
-      
+/*Links */
       <BrowserRouter>
       
       <div>
@@ -79,11 +81,18 @@ export default class App extends Component {
         <Switch>
 
           <Route exact path='/' component={HomePage}> {/*Home page*/} <div>
-          <button onClick={ this.PageDown }>Previous Page</button>
-          <button onClick={ this.PageUp }>Next Page</button>
-          <h3>Page {this.state.pageNum}</h3>
-          <h1 style={{fontSize: 45}}>Find a flick app</h1>
+            <h1 style={{fontSize: 45}}>Find a flick app</h1>
 
+{/*Check if page num > 1 if it is display prev page button */}
+            {this.state.pageNum > 1 &&
+          <button onClick={ this.PageDown }>Previous Page</button> }
+
+{/*Page up button (always shown) */}
+          <button onClick={ this.PageUp }>Next Page</button>
+
+          <h3>Page {this.state.pageNum}</h3>
+
+{/*Search bar, update searchValue with what user types in */}
         <input name="text" 
         type="text" 
         placeholder="Search Movies!" 
@@ -92,6 +101,7 @@ export default class App extends Component {
         />
         <button onClick={this.handleSearch}>Search</button>
 
+{/*display API data */}
 {this.state.movies ? (
   <div id="movies-container">
     {this.state.movies.map((movie, index) => (
@@ -113,15 +123,10 @@ export default class App extends Component {
 
         </Switch>
         
-
-        
-        
-        
       </div>
       
       </BrowserRouter>
       
     )
-    
   }
 }
