@@ -1,13 +1,23 @@
 import React from 'react'
 
-import App from '../App'
-//import db from "./containers/db.json"
-const RenderMovies = (addedMovie) => {
-    let movie = addedMovie.title
+//import App from 'App'
+
+const RenderMovies = (TheMovies) => {
     return (
-        <h1>My favorite movies!!!
-        <div>{movie}{/*this.props.state.watchListMovies*/}</div>
-        </h1>
-    )
-}
+
+<div>
+  <div id="MyWatchListMovies">
+    {TheMovies.map((movie, index) => (
+      <div className="Movie" key={index}>
+        <h2>{movie.Title}: ({movie.Type}, {movie.Year})</h2>
+        <img src={movie.Poster} alt=''/>
+        <br></br>
+      </div>
+    ))}
+  </div>
+ : (
+  <p></p>
+  </div>
+)}
+
 export default RenderMovies
