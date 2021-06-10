@@ -148,7 +148,7 @@ export default class App extends Component {
         </div><HomePage /> </Route>
           <Route exact path='/About' component={About}> {/*About page*/} <About /></Route>
           <Route exact path='/Content' component={Content}> {/*Content page*/} <Content /> </Route>
-          <Route exact path='/MyList' component={MyList}> <h1>MY LIST!!</h1> {/*My List Page*/} <MyList/> </Route>
+          <Route exact path='/MyList' component={MyList}> <h1>MY LIST:</h1> {/*My List Page*/} <MyList/> </Route>
           <Route exact path='/PageNotFound' component={PageNotFound} />
           <Redirect to="/PageNotFound"/>
 

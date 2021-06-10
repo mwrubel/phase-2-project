@@ -1,18 +1,3 @@
 {
-  "MyWatchListMovies": [
-    {
-      "Movie": "Alien",
-      "Year": "1979",
-      "Type": "movie",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BMmQ2MmU3NzktZjAxOC00ZDZhLTk4YzEtMDMyMzcxY2IwMDAyXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
-      "id": 1
-    },
-    {
-      "Movie": "John Wick: Chapter 2",
-      "Year": "2017",
-      "Type": "movie",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BMjE2NDkxNTY2M15BMl5BanBnXkFtZTgwMDc2NzE0MTI@._V1_SX300.jpg",
-      "id": 2
-    }
-  ]
+  "MyWatchListMovies": []
 }

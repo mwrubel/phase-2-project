@@ -23,10 +23,12 @@ export default class MyList extends Component {
       <div className='Mapped-List'>
         
         {
-        this.state.myMovies && this.state.myMovies.length>0 && this.state.myMovies.map((movie, i)=>
+        this.state.myMovies && this.state.myMovies.length>0 ? this.state.myMovies.map((movie, i)=>
         <h2>{i+=1}. {movie.Movie}: ({movie.Type}, {movie.Year})
         <br></br><img src={movie.Poster} alt=''/></h2>)
-        }
+
+    : <h1>Nothing to see here! You didn't add any movies yet!!!</h1>    
+    }
     
       </div>
     )
