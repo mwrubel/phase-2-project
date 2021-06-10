@@ -11,7 +11,6 @@ return(
     <h2>Titanic (1997)</h2>
     <img src='titanic.png' alt=''/>
     </div>
-    
 )}
 
 export default Page2

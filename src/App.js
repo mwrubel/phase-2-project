@@ -58,10 +58,9 @@ export default class App extends Component {
             return response.json()
           })
           .then(data => {this.setState({ movies: data.Search })})
-          //console.log(this.state.movies)
       }
 
-  // POST request with a JSON body 
+// POST request with a JSON body 
    postRequest = (title, year, type, poster) => {
    fetch("http://localhost:3001/MyWatchListMovies", {
       method: 'POST',
@@ -103,7 +102,8 @@ export default class App extends Component {
       
         <Switch>
 
-          <Route exact path='/' component={HomePage}> {/*Home page*/} <div>
+{/*HOME PAGE*/}
+          <Route exact path='/' component={HomePage}> <div>
             <h1 style={{fontSize: 45}}>Find a flick app</h1>
 
 {/*Check if page num > 1 if it is display prev page button */}
@@ -122,12 +122,14 @@ export default class App extends Component {
         onChange={event => this.handleOnChange(event)}
         value={this.state.searchValue}
         />
-        
+
+{/*Search button */}  
         <button onClick={this.handleSearch}>Search</button>
 
 {/*display API data */}
 {this.state.movies ? (
   <div id="movies-container">
+
     {this.state.movies.map((movie, index) => (
       <div className="single-movie" key={index}>
         <h2>{index+=1}. {movie.Title}: ({movie.Type}, {movie.Year})</h2>
@@ -137,7 +139,6 @@ export default class App extends Component {
         
 {/*Button to POST data<h1><button onClick={this.postRequest(movie)}></button></h1>*/}
 <h1><button onClick={() => this.postRequest(movie.Title, movie.Year, movie.Type, movie.Poster)}>Add to list</button></h1>
-        {/*this.state.watchListMovies.push(this.state.movies[index])*/}   
 
       </div>
     ))}
@@ -146,6 +147,8 @@ export default class App extends Component {
   <p></p>
 )}
         </div><HomePage /> </Route>
+
+ {/*Rest of the routes*/}       
           <Route exact path='/About' component={About}> {/*About page*/} <About /></Route>
           <Route exact path='/Content' component={Content}> {/*Content page*/} <Content /> </Route>
           <Route exact path='/MyList' component={MyList}> <h1>MY LIST:</h1> {/*My List Page*/} <MyList/> </Route>
@@ -153,11 +156,8 @@ export default class App extends Component {
           <Redirect to="/PageNotFound"/>
 
         </Switch>
-        
       </div>
-      
       </BrowserRouter>
-      
     )
   }
 }
