@@ -58,16 +58,11 @@ export default class App extends Component {
             return response.json()
           })
           .then(data => {this.setState({ movies: data.Search })})
+          //console.log(this.state.movies)
       }
 
-  addToFavorites = () => {
-      this.postRequest()
-      console.log("added to my list")
-      console.log(this.state.watchListMovies)
-  }
-
   // POST request with a JSON body 
-   postRequest = () => {
+   postRequest = (title, year, type, poster) => {
    fetch("http://localhost:3001/MyWatchListMovies", {
       method: 'POST',
       headers : {
@@ -75,19 +70,13 @@ export default class App extends Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({   
-         'Movie': this.state.watchListMovies,        
+         'Movie': title,
+         'Year': year,
+         'Type': type,
+         'Poster': poster
         })
 })
   }
-
-  fetchMyList = () => {
-        const requiredObj = {
-        method: "GET"}
-       fetch('http://localhost:3001/MyWatchListMovies', requiredObj)
-          .then(response => {
-            return response.json()
-          })
-          .then(data => {MyList.RenderMovies(data) })}
 
   render() {
       
@@ -141,13 +130,14 @@ export default class App extends Component {
   <div id="movies-container">
     {this.state.movies.map((movie, index) => (
       <div className="single-movie" key={index}>
-        <h2>{movie.Title}: ({movie.Type}, {movie.Year})</h2>
+        <h2>{index+=1}. {movie.Title}: ({movie.Type}, {movie.Year})</h2>
         <img src={movie.Poster} alt=''/>
 
         <br></br>
-{/*Button to POST data*/}
-        <h1><button onClick={() => this.addToFavorites()}>Add to list</button></h1>
-        {this.state.watchListMovies.push(this.state.movies[index])}    
+        
+{/*Button to POST data<h1><button onClick={this.postRequest(movie)}></button></h1>*/}
+<h1><button onClick={() => this.postRequest(movie.Title, movie.Year, movie.Type, movie.Poster)}>Add to list</button></h1>
+        {/*this.state.watchListMovies.push(this.state.movies[index])*/}   
 
       </div>
     ))}
@@ -158,7 +148,7 @@ export default class App extends Component {
         </div><HomePage /> </Route>
           <Route exact path='/About' component={About}> {/*About page*/} <About /></Route>
           <Route exact path='/Content' component={Content}> {/*Content page*/} <Content /> </Route>
-          <Route exact path='/MyList' component={MyList}> aa{()=>this.fetchMyList} {/*My List Page*/} <MyList/> </Route>
+          <Route exact path='/MyList' component={MyList}> <h1>MY LIST!!!</h1> {/*My List Page*/} <MyList/> </Route>
           <Route exact path='/PageNotFound' component={PageNotFound} />
           <Redirect to="/PageNotFound"/>
 
